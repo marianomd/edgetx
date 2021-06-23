@@ -1,7 +1,7 @@
 include(CMakeForceCompiler)
 include(Bitmaps)
 
-set(PCB_TYPES X9LITE X9LITES X7 XLITE XLITES X9D X9D+ X9E X10 X12S SKY9X 9XRPRO AR9X NV14)
+set(PCB_TYPES X9LITE X9LITES X7 XLITE XLITES X9D X9D+ X9E X10 X12S SKY9X 9XRPRO AR9X NV14 I6X)
 set(RADIO_LANGUAGES CZ DE EN ES FR IT PT SK SE PL HU NL CN TW)
 set(TTS_LANGUAGES CZ DE EN ES FR IT PT SK SE PL HU NL RU)
 
@@ -100,6 +100,8 @@ elseif(PCB STREQUAL X9E OR PCB STREQUAL X9D+ OR PCB STREQUAL X9D OR PCB STREQUAL
   include(targets/taranis/CMakeLists.txt)
 elseif(PCB STREQUAL SKY9X OR PCB STREQUAL 9XRPRO OR PCB STREQUAL AR9X)
   include(targets/sky9x/CMakeLists.txt)
+elseif(PCB STREQUAL I6X)
+  include(targets/flysky/CMakeLists.txt)
 else()
   message(FATAL_ERROR "Unknown PCB '${PCB}'")
 endif()
@@ -121,6 +123,10 @@ endif()
 
 if(CPU_TYPE STREQUAL STM32F2)
   include(targets/common/arm/stm32/f2/CMakeLists.txt)
+endif()
+
+if(CPU_TYPE STREQUAL STM32F0)
+  include(targets/common/arm/stm32/f0/CMakeLists.txt)
 endif()
 
 if(CPU_FAMILY STREQUAL STM32)
